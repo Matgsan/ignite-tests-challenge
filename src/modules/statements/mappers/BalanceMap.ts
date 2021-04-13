@@ -7,9 +7,11 @@ export class BalanceMap {
       amount,
       description,
       type,
+      sender_id,
       created_at,
       updated_at
-    }) => (
+    }) => {
+      const defaultStatement =
       {
         id,
         amount: Number(amount),
@@ -18,7 +20,12 @@ export class BalanceMap {
         created_at,
         updated_at
       }
-    ));
+      if(type === 'transfer'){
+        Object.assign(defaultStatement, {sender_id});
+      }
+      return defaultStatement;
+    }
+    );
 
     return {
       statement: parsedStatement,
